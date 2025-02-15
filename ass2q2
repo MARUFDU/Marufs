@@ -1,0 +1,52 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the parametric equations for the given ellipse
+def r_ellipse(t):
+    x = 4 * np.cos(t)
+    y = 5 * np.sin(t)
+    return np.array([x, y])
+
+# Compute the derivative of r(t) (tangent vector)
+def r_ellipse_derivative(t):
+    dx_dt = -4 * np.sin(t)
+    dy_dt = 5 * np.cos(t)
+    return np.array([dx_dt, dy_dt])
+
+# Points of interest
+t_values_ellipse = [np.pi / 4, np.pi]
+
+# Compute position and tangent vectors
+positions_ellipse = [r_ellipse(t) for t in t_values_ellipse]
+tangents_ellipse = [r_ellipse_derivative(t) for t in t_values_ellipse]
+
+# Generate curve points for visualization
+t_curve_ellipse = np.linspace(0, 2 * np.pi, 300)
+curve_points_ellipse = np.array([r_ellipse(t) for t in t_curve_ellipse])
+
+# Plot the curve
+plt.figure(figsize=(8, 6))
+plt.plot(curve_points_ellipse[:, 0], curve_points_ellipse[:, 1], label="Ellipse C", color='blue')
+
+# Plot position vectors and tangent vectors
+for i, t in enumerate(t_values_ellipse):
+    pos = positions_ellipse[i]
+    tan = tangents_ellipse[i]
+
+    # Plot position vector
+    plt.quiver(0, 0, pos[0], pos[1], angles='xy', scale_units='xy', scale=1, color='green', label=f'r({t:.2f})' if i == 0 else "")
+
+    # Plot tangent vector
+    plt.quiver(pos[0], pos[1], tan[0], tan[1], angles='xy', scale_units='xy', scale=1, color='red', label=f'r\'({t:.2f})' if i == 0 else "")
+
+# Labels and title
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Ellipse C with Position and Tangent Vectors")
+plt.legend()
+plt.grid()
+plt.axis('equal')
+plt.show()
+
+# Display computed vectors
+positions_ellipse, tangents_ellipse
