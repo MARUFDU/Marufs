@@ -20,3 +20,73 @@ tangent_plane_eq = sp.simplify(tangent_plane)
 
 # Display the equation of the tangent plane
 sp.Eq(tangent_plane_eq, 0)
+
+################################################################################
+import sympy as sp
+
+# Define variables
+x, y, z = sp.symbols('x y z')
+
+# Define the ellipsoid function
+F = x**2 + 4*y**2 + z**2 - 18
+
+# Compute the gradient of F
+grad_F = [sp.diff(F, var) for var in (x, y, z)]
+
+# Evaluate the gradient at the given point (1,2,1)
+point = {x: 1, y: 2, z: 1}
+normal_vector = [grad.subs(point) for grad in grad_F]
+
+# Equation of the tangent plane
+tangent_plane = normal_vector[0] * (x - 1) + normal_vector[1] * (y - 2) + normal_vector[2] * (z - 1)
+
+tangent_plane_eq = sp.simplify(tangent_plane)
+
+# Parametric equations of the normal line
+t = sp.symbols('t')
+x_t = 1 + normal_vector[0] * t
+y_t = 2 + normal_vector[1] * t
+z_t = 1 + normal_vector[2] * t
+
+# Display results
+parametric_eqs = (x_t, y_t, z_t)
+sp.Eq(tangent_plane_eq, 0), parametric_eqs
+#####################################################################################
+import sympy as sp
+import numpy as np
+
+# Define variables
+x, y, z = sp.symbols('x y z')
+
+# Define the ellipsoid function
+F = x**2 + 4*y**2 + z**2 - 18
+
+# Compute the gradient of F
+grad_F = [sp.diff(F, var) for var in (x, y, z)]
+
+# Evaluate the gradient at the given point (1,2,1)
+point = {x: 1, y: 2, z: 1}
+normal_vector = [grad.subs(point) for grad in grad_F]
+
+# Equation of the tangent plane
+tangent_plane = normal_vector[0] * (x - 1) + normal_vector[1] * (y - 2) + normal_vector[2] * (z - 1)
+
+tangent_plane_eq = sp.simplify(tangent_plane)
+
+# Parametric equations of the normal line
+t = sp.symbols('t')
+x_t = 1 + normal_vector[0] * t
+y_t = 2 + normal_vector[1] * t
+z_t = 1 + normal_vector[2] * t
+
+# Compute the angle between the tangent plane and the xy-plane
+normal_vector_np = np.array(normal_vector, dtype=float)
+k_vector_np = np.array([0, 0, 1], dtype=float)
+cos_theta = np.dot(normal_vector_np, k_vector_np) / (np.linalg.norm(normal_vector_np) * np.linalg.norm(k_vector_np))
+angle_rad = np.arccos(cos_theta)
+angle_deg = np.degrees(angle_rad)
+
+# Display results
+parametric_eqs = (x_t, y_t, z_t)
+sp.Eq(tangent_plane_eq, 0), parametric_eqs, angle_deg
+############################################################################################
