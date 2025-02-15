@@ -1,0 +1,22 @@
+import sympy as sp
+
+# Define variables
+x, y, z = sp.symbols('x y z')
+
+# Define the ellipsoid function
+F = x**2 + 4*y**2 + z**2 - 18
+
+# Compute the gradient of F
+grad_F = [sp.diff(F, var) for var in (x, y, z)]
+
+# Evaluate the gradient at the given point (1,2,1)
+point = {x: 1, y: 2, z: 1}
+normal_vector = [grad.subs(point) for grad in grad_F]
+
+# Equation of the tangent plane
+tangent_plane = normal_vector[0] * (x - 1) + normal_vector[1] * (y - 2) + normal_vector[2] * (z - 1)
+
+tangent_plane_eq = sp.simplify(tangent_plane)
+
+# Display the equation of the tangent plane
+sp.Eq(tangent_plane_eq, 0)
