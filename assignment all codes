@@ -1,34 +1,37 @@
-a = float(input("Enter Attendence number out of 5 : "))
-
-b = float(input("Enter 1st incourse marks out of 25: "))
-c = float(input("Enter 12nd incourse marks out of 25: "))
-d = float(input("Enter Final marks out of 70: "))
-
-avrg = folat(b+c)/2
-
-print(avrg)
-summ= a + avrg + d 
-
-if summ>=80:
-    print("tour grsfe is A+ and point is   4.00" )
-elif summ>=75:
-    print("tour grsfe is A and point is   3.75" )
-elif summ>=70:
-    print("tour grsfe is A- and point is   3.50" )
-elif summ>65:
-    print("tour grsfe is B+ and point is   3.25" )
-elif summ>=60:
-    print("tour grsfe is B+ and point is   3.00" )
-elif summ>=55:
-    print("tour grsfe is B+ and point is   2.75" ) 
-elif summ>=50:
-    print("tour grsfe is B+ and point is   2.50" )
-elif summ>=45:
-    print("tour grsfe is B+ and point is   2.25" )
-elif summ>=40:
-    print("tour grsfe is B+ and point is   2.00" )
-elif summ<40:
-    print("tour grsfe is B+ and point is   0.00" )
+def result(first_incourse,second_incours,attendancee,finall):
+  res = (first_incourse + second_incours)/2 + attendancee + finall
+  return res
+txt = open(file='marks.txt')
+marks = txt.readlines()
+print('Roll','Letter Grade','Grade Point')
+print('=== ==============  =========')
+for line in marks:
+  parts = line.strip().split('       ')
+  roll, first_inc, second_inc, attendance, final = parts
+  ress = result(int(first_inc),int(second_inc),int(attendance),int(final))
+  if int(roll)<0 or int(first_inc)<0 or int(first_inc)>25 or int(second_inc)<0 or int(second_inc)>25 or int(attendance)<0 or int(attendance)>5 or int(final)<0 or int(final)>70:
+    print('The number or roll is not correct!')
+    continue
+  if ress>=80:
+    print(roll,'      A+','        4.00')
+  elif ress>=75 and ress<80:
+    print(roll,'      A','         3.75')
+  elif ress>=70 and ress<75:
+    print(roll,'      A-','        3.5')
+  elif ress>=65 and ress<70:
+    print(roll,'      B+','        3.25')
+  elif ress>=60 and ress<65:
+    print(roll,'      B','         3.00')
+  elif ress>=55 and ress<60:
+    print(roll,'      B-','        2.75')
+  elif ress>=50 and ress<55:
+    print(roll,'      C+','        2.50')
+  elif ress>=45 and ress<50:
+    print(roll,'      C','         2.25')
+  elif ress>=40 and ress<45:
+    print(roll,'      D','         0.0')
+  elif ress>=0 and ress<40:
+    print(roll,'      F','         0.00')
 ----------------------------
 number=[]
 text=open('regex-sum-42.txt')
